@@ -287,6 +287,8 @@ class HomeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLargeScreen = MediaQuery.of(context).size.width >= 500;
+
     return Padding(
       padding: EdgeInsets.fromLTRB(12, 12, 10, 0),
       child: Column(
@@ -371,18 +373,105 @@ class HomeSection extends StatelessWidget {
           Expanded(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: isLargeScreen ? 4 : 2,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.75,
+                  childAspectRatio: 0.6,
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  return ProductCard(
-                    img: product['img']!,
-                    productName: product['productName']!,
-                    price: product['price']!,
+                  return InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                                width: double.infinity,
+                                height: 240,
+                                padding: EdgeInsets.all(20),
+                                child: Center(
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                      // text field section
+                                      Expanded(
+                                        child: TextField(
+                                            decoration: InputDecoration(
+                                          labelText: 'Enter text',
+                                        )),
+                                      ),
+
+                                      SizedBox(
+                                        width: 14,
+                                      ),
+                                      // plus minus and add to card
+                                      Container(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ElevatedButton.icon(
+                                                  onPressed: () {
+                                                    print('Add');
+                                                  },
+                                                  icon: Icon(Icons.add),
+                                                  label: Text('Add'),
+                                                ),
+                                                SizedBox(
+                                                  width: 14,
+                                                ),
+                                                ElevatedButton.icon(
+                                                  onPressed: () {
+                                                    print('Add');
+                                                  },
+                                                  icon: Icon(Icons.remove),
+                                                  label: Text('Decrease'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          foregroundColor: Colors
+                                                              .white, // background color
+                                                          backgroundColor:
+                                                              Colors.red),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 28,
+                                            ),
+                                            Column(children: [
+                                              SizedBox.square(
+                                                child: ElevatedButton.icon(
+                                                  onPressed: () {
+                                                    print('Add');
+                                                  },
+                                                  icon: Icon(Icons.add),
+                                                  label: Text('Add To Cart'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          backgroundColor: Colors
+                                                              .green, // background color
+                                                          foregroundColor:
+                                                              Colors.white),
+                                                ),
+                                              )
+                                            ])
+                                          ],
+                                        ),
+                                      )
+                                    ])));
+                          });
+                    },
+                    child: ProductCard(
+                      img: product['img']!,
+                      productName: product['productName']!,
+                      price: product['price']!,
+                    ),
                   );
                 }),
           )

@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.network(img, height: 150, width: 150, fit: BoxFit.cover),
+            Image.network(img, height: 230, width: 150, fit: BoxFit.cover),
             SizedBox(height: 10),
             Column(
               children: [
