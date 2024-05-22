@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:getx_tutorial/route.dart';
 
-
 void main() {
-  runApp(const GetMaterialApp(home: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,4 +16,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

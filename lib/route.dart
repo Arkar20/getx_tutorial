@@ -1,7 +1,5 @@
-import 'package:getx_tutorial/page/about.dart';
-import 'package:getx_tutorial/page/contact-us.dart';
-import 'package:getx_tutorial/page/customer.dart';
 import 'package:getx_tutorial/page/home.dart';
+import 'package:getx_tutorial/page/shopping-cart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
@@ -11,25 +9,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
+        return HomePage();
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'about-us',
+          path: 'shopping-cart',
           builder: (BuildContext context, GoRouterState state) {
-            return const AboutUsPage();
-          },
-        ),
-         GoRoute(
-          path: 'contact-us',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ContactUsPage();
-          },
-        ),
-         GoRoute(
-          path: 'customers',
-          builder: (BuildContext context, GoRouterState state) {
-            return const CustomerPage();
+            return const ShoppingCartPage();
           },
         ),
       ],
