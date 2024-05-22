@@ -287,7 +287,15 @@ class HomeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLargeScreen = MediaQuery.of(context).size.width >= 500;
+    final isLargeScreen = MediaQuery.of(context).size.width >= 1024;
+    final isxLargeScreen = MediaQuery.of(context).size.width >= 1440;
+
+    double getAspectRatio() {
+      if (isxLargeScreen) {
+        return 0.83;
+      }
+      return isLargeScreen ? 0.7 : 0.75;
+    }
 
     return Padding(
       padding: EdgeInsets.fromLTRB(12, 12, 10, 0),
@@ -373,10 +381,10 @@ class HomeSection extends StatelessWidget {
           Expanded(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: isLargeScreen ? 4 : 2,
+                  crossAxisCount: isLargeScreen ? 6 : 2,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.6,
+                  childAspectRatio: getAspectRatio(),
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {

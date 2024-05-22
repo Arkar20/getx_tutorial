@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:getx_tutorial/utils/responsive.dart';
 
 class ProductCard extends StatelessWidget {
   final String img;
@@ -25,7 +26,7 @@ class ProductCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.network(img, height: 230, width: 150, fit: BoxFit.cover),
+            Image.network(img, width: double.infinity, fit: BoxFit.cover),
             SizedBox(height: 10),
             Column(
               children: [
