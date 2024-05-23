@@ -1,5 +1,5 @@
 import 'package:getx_tutorial/page/home.dart';
-import 'package:getx_tutorial/page/shopping-cart.dart';
+import 'package:getx_tutorial/page/shopping-cart/shopping-cart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
