@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getx_tutorial/utils/responsive.dart';
 
 class ProductCard extends StatelessWidget {
   final String img;
@@ -25,10 +24,13 @@ class ProductCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Image.network(img, width: double.infinity, fit: BoxFit.cover),
             SizedBox(height: 10),
             Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   productName,
@@ -41,8 +43,8 @@ class ProductCard extends StatelessWidget {
                 Text(
                   price,
                   style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.grey[500],
+                    fontSize: 12.0,
+                    color: Colors.grey[600],
                   ),
                 ),
               ],

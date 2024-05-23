@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tutorial/page/orders.dart';
 import 'package:getx_tutorial/store/bottom-navigation.dart';
+import 'package:getx_tutorial/widgets/layouts/bottom-navigation.dart';
 import 'package:getx_tutorial/widgets/product_card.dart';
+import 'package:getx_tutorial/widgets/templates/products/addtocart_modal_section.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
@@ -212,62 +214,13 @@ class HomePage extends StatelessWidget {
     // Add more products as needed
   ];
 
-  buildBottomNavigationMenu(context, landingPageController) {
-    return Obx(() => MediaQuery(
-        data:
-            MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(0.8)),
-        child: SizedBox(
-          height: 54,
-          child: BottomNavigationBar(
-            showUnselectedLabels: true,
-            showSelectedLabels: true,
-            onTap: landingPageController.changeTabIndex,
-            currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-            unselectedItemColor: Colors.white.withOpacity(0.5),
-            selectedItemColor: Colors.white,
-            unselectedLabelStyle: TextStyle(
-                color: Colors.white.withOpacity(0.5),
-                fontWeight: FontWeight.w500,
-                fontSize: 12),
-            selectedLabelStyle: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12),
-            items: [
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.shop,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'POS',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.store,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Orders',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-              ),
-            ],
-          ),
-        )));
-  }
-
   @override
   Widget build(BuildContext context) {
     final BottomNavigationController bottomNavigationController =
         Get.put(BottomNavigationController());
     return Scaffold(
         backgroundColor: Colors.blue[800],
-        bottomNavigationBar:
-            buildBottomNavigationMenu(context, bottomNavigationController),
+        bottomNavigationBar: const BottomNavigationFooter(),
         body: SafeArea(
             child: Obx(
           () => IndexedStack(
@@ -298,7 +251,7 @@ class HomeSection extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(12, 12, 10, 0),
+      padding: EdgeInsets.fromLTRB(4, 4, 4, 0),
       child: Column(
         children: [
           Row(
@@ -324,13 +277,16 @@ class HomeSection extends StatelessWidget {
                     color: Colors.blue[400],
                     borderRadius: BorderRadius.circular(12)),
                 padding: EdgeInsets.all(12),
-                child: IconButton(
-                  onPressed: () {
-                    context.go('/shopping-cart');
-                  },
-                  icon: Icon(
-                    Icons.shopping_bag,
-                    color: Colors.white,
+                child: Badge(
+                  label: Text('1'),
+                  child: IconButton(
+                    onPressed: () {
+                      context.go('/shopping-cart');
+                    },
+                    icon: Icon(
+                      Icons.shopping_bag,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               )
@@ -382,7 +338,7 @@ class HomeSection extends StatelessWidget {
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: isLargeScreen ? 6 : 2,
-                  crossAxisSpacing: 8,
+                  crossAxisSpacing: 4,
                   mainAxisSpacing: 8.0,
                   childAspectRatio: getAspectRatio(),
                 ),
@@ -394,85 +350,7 @@ class HomeSection extends StatelessWidget {
                       showModalBottomSheet(
                           context: context,
                           builder: (context) {
-                            return Container(
-                                width: double.infinity,
-                                height: 240,
-                                padding: EdgeInsets.all(20),
-                                child: Center(
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                      // text field section
-                                      Expanded(
-                                        child: TextField(
-                                            decoration: InputDecoration(
-                                          labelText: 'Enter text',
-                                        )),
-                                      ),
-
-                                      SizedBox(
-                                        width: 14,
-                                      ),
-                                      // plus minus and add to card
-                                      Container(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                ElevatedButton.icon(
-                                                  onPressed: () {
-                                                    print('Add');
-                                                  },
-                                                  icon: Icon(Icons.add),
-                                                  label: Text('Add'),
-                                                ),
-                                                SizedBox(
-                                                  width: 14,
-                                                ),
-                                                ElevatedButton.icon(
-                                                  onPressed: () {
-                                                    print('Add');
-                                                  },
-                                                  icon: Icon(Icons.remove),
-                                                  label: Text('Decrease'),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          foregroundColor: Colors
-                                                              .white, // background color
-                                                          backgroundColor:
-                                                              Colors.red),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 28,
-                                            ),
-                                            Column(children: [
-                                              SizedBox.square(
-                                                child: ElevatedButton.icon(
-                                                  onPressed: () {
-                                                    print('Add');
-                                                  },
-                                                  icon: Icon(Icons.add),
-                                                  label: Text('Add To Cart'),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          backgroundColor: Colors
-                                                              .green, // background color
-                                                          foregroundColor:
-                                                              Colors.white),
-                                                ),
-                                              )
-                                            ])
-                                          ],
-                                        ),
-                                      )
-                                    ])));
+                            return const AddToCart();
                           });
                     },
                     child: ProductCard(
